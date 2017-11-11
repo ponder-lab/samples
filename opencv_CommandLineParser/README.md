@@ -1,4 +1,4 @@
-#opencv_CommandLineParser
+opencv_CommandLineParser
 
 ## keys string
 
