@@ -111,41 +111,29 @@ class genotype(list):
         while len(gene_idx_list) < num_mutate:
             idx = random.randrange(len(self))
             if idx not in gene_idx_list:
-                col = idx // (self.rows * self.node_len)
-                accessible_range = self.get_accessible_range(col)
-
                 # Output node
                 if idx >= len(self) - self.num_output:
+                    accessible_range = self.get_accessible_range(self.cols)
                     self[idx] = random.randrange(accessible_range.start,
                                                  accessible_range.stop)
                     gene_idx_list += [idx]
                 # Operation node
                 else:
                     sub_idx = idx % self.node_len
-                    op_idx = self[idx - sub_idx + self.node_len - 1]
-                    arity = ops.arities[op_idx]
 
                     # Operation type node
                     if sub_idx == self.node_len - 1:
                         num_ops = ops.num()
-                        new_op = random.randrange(num_ops)
-                        new_arity = ops.arities[new_op]
-                        old_arity = ops.arities[self[idx]]
-                        # if # of arity increase assign unconnected input port
-                        if new_arity > old_arity:
-                            node_origin = idx + 1 - self.node_len
-                            for i in range(old_arity, new_arity):
-                                self[node_origin+i] = random.randrange(accessible_range.start,
-                                                                       accessible_range.stop)
                         self[idx] = random.randrange(num_ops)
                         gene_idx_list += [idx]
                     # Operation input node
-                    elif sub_idx < arity:
+                    else:
+                        col = idx // (self.rows * self.node_len)
+                        accessible_range = self.get_accessible_range(col)
+                        
                         self[idx] = random.randrange(accessible_range.start,
                                                  accessible_range.stop)
                         gene_idx_list += [idx]
-                    # Invalid gene
-                    #else:
 
     def draw_graph(self, ops, name="test"):
         graph = graphviz.Digraph(name, format="png")

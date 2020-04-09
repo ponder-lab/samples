@@ -21,7 +21,7 @@ def func_fitness(exp, odata):
     return -sum
 
 # Set random seed if necessary
-random.seed(1)
+random.seed(2)
 
 # Define network parameters
 num_input = 2
