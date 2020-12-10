@@ -3,6 +3,7 @@
 Capture image from RasPi Cam
 -Prerequisites
  -Install OpenCV: pip install opencv-python
+ -You may need libatlas to use python3: sudo apt install libatlas-base-dev
  -picamera is already installed if raspbian
 """
 
@@ -11,23 +12,25 @@ import numpy as np
 import cv2
 import picamera
 
-with picamera.PiCamera(resolution=(640, 480), framerate=30) as camera:
-    camera.start_preview()
+camera = picamera.PiCamera(resolution=(640, 480), framerate=30)
 
-    stream = io.BytesIO()
-    for _ in camera.capture_continuous(stream, format='raw',
-                                       use_video_port=True):
+#camera.start_preview()
 
-        buf = np.frombuffer(stream.getvalue(), dtype=np.uint8)
-        buf = buf.reshape(-1, 640)
+stream = io.BytesIO()
+for _ in camera.capture_continuous(stream, format='raw',
+                                   use_video_port=True):
 
-        img = cv2.cvtColor(buf, cv2.COLOR_YUV2BGR_I420)
+    buf = np.frombuffer(stream.getvalue(), dtype=np.uint8)
+    buf = buf.reshape(-1, 640)
 
-        stream.seek(0)
-        stream.truncate()
+    img = cv2.cvtColor(buf, cv2.COLOR_YUV2BGR_I420)
 
-        cv2.imshow("img", img)
-        if cv2.waitKey(1) == 27:
-            break
+    stream.seek(0)
+    stream.truncate()
 
-    camera.stop_preview()
+    cv2.imshow("img", img)
+    if cv2.waitKey(1) == 27:
+        break
+
+#camera.stop_preview()
+camera.close()
