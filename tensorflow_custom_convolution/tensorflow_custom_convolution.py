@@ -17,8 +17,8 @@ class MyConv2D(tf.keras.layers.Layer):
 
     def build(self, input_shape):
 
-        weights_shape = (self.filters * self.kernel_size[0] * \
-                         self.kernel_size[1] * input_shape[-1],)
+        weights_shape = (self.filters,
+                         self.kernel_size[0] * self.kernel_size[1] * input_shape[-1])
         w = tf.random.normal(weights_shape, stddev=0.01)
         self.w = self.add_weight(shape=w.shape, trainable=True)
         self.w.assign(w)
@@ -77,19 +77,19 @@ def get_model_myconv(input_shape):
     input_node = tf.keras.Input(input_shape)
     x = input_node
 
-    x = tf.keras.layers.MyConv2D(32, (3, 3), padding="same")(x)
+    x = MyConv2D(32, (3, 3), padding="SAME")(x)
     x = tf.keras.layers.Activation("relu")(x)
     x = tf.keras.layers.MaxPooling2D()(x)
 
-    x = tf.keras.layers.MyConv2D(32, (3, 3), padding="valid")(x)
+    x = MyConv2D(32, (3, 3), padding="VALID")(x)
     x = tf.keras.layers.Activation("relu")(x)
     x = tf.keras.layers.MaxPooling2D()(x)
 
-    x = tf.keras.layers.MyConv2D(32, (3, 3), padding="same")(x)
+    x = MyConv2D(32, (3, 3), padding="SAME")(x)
     x = tf.keras.layers.Activation("relu")(x)
     x = tf.keras.layers.MaxPooling2D()(x)
 
-    x = tf.keras.layers.MyConv2D(32, (3, 3), padding="valid")(x)
+    x = MyConv2D(32, (3, 3), padding="VALID")(x)
     x = tf.keras.layers.Activation("relu")(x)
     x = tf.keras.layers.Flatten()(x)
 
@@ -103,7 +103,7 @@ def get_model_myconv(input_shape):
 
 x_train = x_train.astype(np.float32)[..., None] / 255
 
-model = get_model_normal(x_train[0].shape)
+model = get_model_myconv(x_train[0].shape)
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 model.summary()
 
