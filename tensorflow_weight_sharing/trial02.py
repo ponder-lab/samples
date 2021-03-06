@@ -123,5 +123,5 @@ model.build(x_train.shape)
 model.summary()
 
 model.fit(x_train, y_train,
-          batch_size=50, epochs=10, verbose=1,
+          batch_size=100, epochs=10, verbose=1,
           validation_split=0.1)
