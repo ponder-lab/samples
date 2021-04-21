@@ -61,10 +61,10 @@ model_file = "tmp.h5"
 callbacks = [keras.callbacks.ModelCheckpoint(filepath=model_file, \
                                              save_best_only=True)]
 
-model.fit_generator(datagen.flow(x_train, y_train, batch_size=batch_size),
-                    validation_data=(x_valid, y_valid),
-                    steps_per_epoch=len(x_train)/batch_size, epochs=num_epochs,
-                    callbacks=callbacks, verbose=1)
+model.fit(datagen.flow(x_train, y_train, batch_size=batch_size),
+          validation_data=(x_valid, y_valid),
+          steps_per_epoch=len(x_train)/batch_size, epochs=num_epochs,
+          callbacks=callbacks, verbose=1)
 
 model = keras.models.load_model(model_file)
 
