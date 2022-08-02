@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?eclipse-pydev version="1.0"?><pydev_project>
+    <pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">Default</pydev_property>
+    <pydev_property name="org.python.pydev.PYTHON_PROJECT_VERSION">python interpreter</pydev_property>
+    <pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
+        <path>/${PROJECT_DIR_NAME}/cgp</path>
+        <path>/${PROJECT_DIR_NAME}/denoise_simple_ae</path>
+        <path>/${PROJECT_DIR_NAME}/gym_cartpole</path>
+        <path>/${PROJECT_DIR_NAME}/gym_slimevolley</path>
+        <path>/${PROJECT_DIR_NAME}/monty_hall</path>
+        <path>/${PROJECT_DIR_NAME}/opencv_python_cvtcolor</path>
+        <path>/${PROJECT_DIR_NAME}/opencv_python_resize</path>
+        <path>/${PROJECT_DIR_NAME}/python_concurrent_futures</path>
+        <path>/${PROJECT_DIR_NAME}/python_image_filter</path>
+        <path>/${PROJECT_DIR_NAME}/python_interactive</path>
+        <path>/${PROJECT_DIR_NAME}/python_jit</path>
+        <path>/${PROJECT_DIR_NAME}/python_opencv_cam</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_convolution_details</path>
+        <path>/${PROJECT_DIR_NAME}/tensorboard</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_custom_convolution</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_datasets_trial</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_gan_tutorial</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_eager_execution</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_gather</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_keras_augmentation</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_keras_checkpoint</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_keras_custom_layer</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_keras_datasets</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_line_fitting</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_max_pool_same</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_rnn</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_padding</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_pretrained</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_rnn_stateful</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_speech_command</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_tf_module</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_tffunction_workaround</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow_weight_sharing</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow1_batch_normalization</path>
+        <path>/${PROJECT_DIR_NAME}/tensorflow2_speech_command</path>
+    </pydev_pathproperty>
+</pydev_project>
