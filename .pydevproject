@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?eclipse-pydev version="1.0"?><pydev_project>
+        
     <pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">Default</pydev_property>
+        
     <pydev_property name="org.python.pydev.PYTHON_PROJECT_VERSION">python interpreter</pydev_property>
+        
     <pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
         <path>/${PROJECT_DIR_NAME}/cgp</path>
         <path>/${PROJECT_DIR_NAME}/denoise_simple_ae</path>
@@ -38,5 +41,7 @@
         <path>/${PROJECT_DIR_NAME}/tensorflow_weight_sharing</path>
         <path>/${PROJECT_DIR_NAME}/tensorflow1_batch_normalization</path>
         <path>/${PROJECT_DIR_NAME}/tensorflow2_speech_command</path>
+        <path>/${PROJECT_DIR_NAME}/tf_agents_dqn</path>
     </pydev_pathproperty>
+    
 </pydev_project>
