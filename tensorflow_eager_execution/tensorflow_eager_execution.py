@@ -4,6 +4,7 @@ import sys
 import numpy as np
 import tensorflow as tf
 import tensorflow.keras as keras
+import timeit
 
 class MyModel(keras.Model):
     def __init__(self):
@@ -83,6 +84,8 @@ test_accuracy = tf.keras.metrics.SparseCategoricalAccuracy(name="test_accuracy")
 #
 EPOCHS = 10
 
+start_time = timeit.default_timer()
+
 min_loss = sys.float_info.max
 for epoch in range(EPOCHS):
     for images, labels in train_ds:
@@ -113,5 +116,6 @@ model.set_weights(min_weights)
 for test_images, test_labels in test_ds:
     test_step(model, test_loss, test_accuracy, test_images, test_labels)
 
+print("Elapsed time: ", timeit.default_timer() - start_time)
 print("Test Loss: {:.4f}, Test Accuracy: {:.4f}".format(test_loss.result(), test_accuracy.result()))
 
