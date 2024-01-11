@@ -28,7 +28,8 @@ class MyConv2D(tf.keras.layers.Layer):
         self.b.assign(b)
 
         super().build(input_shape)
-        
+
+    @tf.function
     def call(self, inputs):
 
         # Extract patch
