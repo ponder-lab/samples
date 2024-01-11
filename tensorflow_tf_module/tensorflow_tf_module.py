@@ -6,6 +6,7 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
+import timeit
 
 class my_dense(tf.Module):
     def __init__(self, idim, odim, *args, **kwargs):
@@ -66,6 +67,9 @@ def test_dense():
 
 #test_dense()
 
+start_time = timeit.default_timer()
+skipped_time = 0
+
 module = my_module(5)
 
 idata = tf.random.uniform((1000, 2), -1, 1)
@@ -87,7 +91,9 @@ for i in range(epochs):
         optimizer.apply_gradients(zip(gradients, module.trainable_variables))
 
         sum_loss += loss.numpy()
+    print_time = timeit.default_timer()
     print(i, sum_loss)
+    skipped_time += timeit.default_timer() - print_time
     loss_hist += [sum_loss]
 
 # pred = module(idata)
@@ -101,6 +107,8 @@ for i in range(epochs):
 # plt.plot(loss_hist)
 # 
 # plt.show()
+
+print("Elapsed time: ", timeit.default_timer() - start_time - skipped_time)
 
 tf.saved_model.save(module, "model")
 
