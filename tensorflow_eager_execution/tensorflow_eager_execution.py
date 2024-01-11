@@ -85,6 +85,7 @@ test_accuracy = tf.keras.metrics.SparseCategoricalAccuracy(name="test_accuracy")
 EPOCHS = 10
 
 start_time = timeit.default_timer()
+skipped_time = 0
 
 min_loss = sys.float_info.max
 for epoch in range(EPOCHS):
@@ -99,12 +100,14 @@ for epoch in range(EPOCHS):
         min_weights = model.get_weights()
 
     template = "Epoch {}, Loss: {:.4f}, Acc: {:.4f}, Val Loss: {:.4f}, Val Acc: {:.4f}, Min Loss: {:.4f}"
+    print_time = timeit.default_timer()
     print(template.format(epoch + 1,
                           train_loss.result(),
                           train_accuracy.result() * 100,
                           valid_loss.result(),
                           valid_accuracy.result() * 100,
                           min_loss))
+    skipped_time += timeit.default_timer() - print_time
 
     train_loss.reset_states()
     train_accuracy.reset_states()
@@ -116,6 +119,6 @@ model.set_weights(min_weights)
 for test_images, test_labels in test_ds:
     test_step(model, test_loss, test_accuracy, test_images, test_labels)
 
-print("Elapsed time: ", timeit.default_timer() - start_time)
+print("Elapsed time: ", timeit.default_timer() - start_time - skipped_time)
 print("Test Loss: {:.4f}, Test Accuracy: {:.4f}".format(test_loss.result(), test_accuracy.result()))
 
