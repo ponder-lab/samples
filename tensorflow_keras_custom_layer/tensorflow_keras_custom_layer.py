@@ -80,7 +80,7 @@ model = get_model(x_train[0].shape)
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 model.summary()
 
-num_epochs = 10
+num_epochs = 100
 batch_size = 100
 validation_split = 0.2
 model_file = "tmp.h5"
