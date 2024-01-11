@@ -82,7 +82,7 @@ test_accuracy = tf.keras.metrics.SparseCategoricalAccuracy(name="test_accuracy")
 #
 # Run training
 #
-EPOCHS = 10
+EPOCHS = 100
 
 start_time = timeit.default_timer()
 skipped_time = 0
