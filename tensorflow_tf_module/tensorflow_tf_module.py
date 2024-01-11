@@ -16,6 +16,7 @@ class my_dense(tf.Module):
                                  name="w")
             self.b = tf.Variable(tf.zeros((odim,)), name="b")
 
+    @tf.function
     def __call__(self, idata):
         return tf.linalg.matmul(idata, self.w) + self.b
 
