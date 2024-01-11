@@ -36,6 +36,7 @@ class MyConvolution2D(keras.layers.Layer):
                                  initializer="random_normal", name="my_bias",
                                  trainable=True)
 
+    @tf.function
     def call(self, inputs):
         # Get the 3x3 convolution patches
         data = tf.image.extract_patches(inputs, sizes=(1, 3, 3, 1), strides=(1, 1, 1, 1),
