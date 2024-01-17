@@ -2,6 +2,8 @@
 
 import numpy as np
 import tensorflow as tf
+print("TensorFlow version:", tf.__version__)
+assert(tf.__version__ == "2.15.0")
 
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
