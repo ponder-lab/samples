@@ -11,7 +11,7 @@ class MyConv2D(tf.keras.layers.Layer):
     def __init__(self, filters, kernel_size, strides=(1, 1), padding="VALID",
                  *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
+
         self.filters = filters
         self.kernel_size = kernel_size
         self.strides = strides
@@ -30,7 +30,7 @@ class MyConv2D(tf.keras.layers.Layer):
         self.b.assign(b)
 
         super().build(input_shape)
-        
+
     def call(self, inputs):
 
         # Extract patch
