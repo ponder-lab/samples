@@ -3,6 +3,8 @@
 import time
 import numpy as np
 import tensorflow as tf
+print("TensorFlow version:", tf.__version__)
+assert(tf.__version__ == "2.15.0")
 
 class MyConv2D(tf.keras.layers.Layer):
 
