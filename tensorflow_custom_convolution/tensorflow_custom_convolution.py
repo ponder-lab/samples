@@ -114,7 +114,7 @@ model(x_train[:2])
 myconv_start = time.time()
 
 model.fit(x_train, y_train,
-          batch_size=100, epochs=10, verbose=1,
+          batch_size=100, epochs=1, verbose=1,
           validation_split=0.1)
 
 myconv_end = time.time()
@@ -129,7 +129,7 @@ model(x_train[:2])
 normal_start = time.time()
 
 model.fit(x_train, y_train,
-          batch_size=100, epochs=10, verbose=1,
+          batch_size=100, epochs=1, verbose=1,
           validation_split=0.1)
 
 normal_end = time.time()
