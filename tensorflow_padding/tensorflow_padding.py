@@ -7,7 +7,11 @@ import matplotlib.pyplot as plt
 
 import my_layers
 
+from scripts.utils import write_csv
+import timeit
+
 def plot_sample(imgs_g):
+    print_time = timeit.default_timer()
     for i in range(25):
         plt.subplot(5, 5, i+1)
         plt.imshow(imgs_g[i])
@@ -18,6 +22,9 @@ def plot_sample(imgs_g):
 
 x_train = x_train.astype(np.float32) / 255.0
 
+start_time = timeit.default_timer()
+skipped_time = 0
+
 # Reflect
 input_node = keras.layers.Input(shape=x_train.shape[1:])
 pad = my_layers.Padding2D(5, "reflect")(input_node)
@@ -25,7 +32,7 @@ model = keras.models.Model(inputs=input_node, outputs=pad)
 model.summary()
 
 x_reflect = model.predict(x_train)
-plot_sample(x_reflect)
+# plot_sample(x_reflect)
 
 # Symmetric
 input_node = keras.layers.Input(shape=x_train.shape[1:])
@@ -34,7 +41,7 @@ model = keras.models.Model(inputs=input_node, outputs=pad)
 model.summary()
 
 x_symmetric = model.predict(x_train)
-plot_sample(x_symmetric)
+# plot_sample(x_symmetric)
 
 # Replicate
 input_node = keras.layers.Input(shape=x_train.shape[1:])
@@ -45,4 +52,7 @@ model = keras.models.Model(inputs=input_node, outputs=pad)
 model.summary()
 
 x_replicate = model.predict(x_train)
-plot_sample(x_replicate)
+# plot_sample(x_replicate)
+
+time = timeit.default_timer() - start_time - skipped_time
+write_csv(__file__, None, None, None, time)
