@@ -9,6 +9,7 @@ class Padding2D(keras.layers.Layer):
         self.mode = mode
         super(Padding2D, self).__init__(**kwargs)
 
+    @tf.function
     def call(self, x):
         #rank = len(x.shape)
         #assert rank == 4, "Padding2D: tensor order must be 4"
