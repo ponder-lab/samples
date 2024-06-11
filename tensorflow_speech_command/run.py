@@ -194,6 +194,7 @@ spectrogram_ds = waveform_ds.map(
 ## Build and train model
 ##
 
+@tf.function
 def preprocess_dataset(files):
     files_ds = tf.data.Dataset.from_tensor_slices(files)
     output_ds = files_ds.map(
