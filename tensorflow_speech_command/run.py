@@ -278,7 +278,7 @@ print_time = timeit.default_timer()
 metrics = history.history
 plt.plot(history.epoch, metrics['loss'], metrics['val_loss'])
 plt.legend(['loss', 'val_loss'])
-plt.show()
+# plt.show()
 skipped_time += timeit.default_timer() - print_time
 
 ##
@@ -316,7 +316,7 @@ for spectrogram, label in sample_ds.batch(1):
     print_time = timeit.default_timer()
     plt.bar(commands, tf.nn.softmax(prediction[0]))
     plt.title(f'Predictions for "{commands[label[0]]}"')
-    plt.show()
+    # plt.show()
     skipped_time += timeit.default_timer() - print_time
 
 time = timeit.default_timer() - start_time - skipped_time
