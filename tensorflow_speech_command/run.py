@@ -10,40 +10,54 @@ import tensorflow as tf
 from tensorflow.keras import layers
 from tensorflow.keras import models
 
+from scripts.utils import write_csv
+import timeit
+
 # Set the seed value for experiment reproducibility.
 seed = 42
 tf.random.set_seed(seed)
 np.random.seed(seed)
 
+start_time = timeit.default_timer()
+skipped_time = 0
+
 DATASET_PATH = 'data/mini_speech_commands'
 
 data_dir = pathlib.Path(DATASET_PATH)
+print_time = timeit.default_timer()
 if not data_dir.exists():
     tf.keras.utils.get_file(
         'mini_speech_commands.zip',
         origin="http://storage.googleapis.com/download.tensorflow.org/data/mini_speech_commands.zip",
         extract=True,
         cache_dir='.', cache_subdir='data')
+skipped_time += timeit.default_timer() - print_time
     
 commands = np.array(tf.io.gfile.listdir(str(data_dir)))
 commands = commands[commands != 'README.md']
+print_time = timeit.default_timer()
 print('Commands:', commands)
+skipped_time += timeit.default_timer() - print_time
 
 filenames = tf.io.gfile.glob(str(data_dir) + '/*/*')
 filenames = tf.random.shuffle(filenames)
 num_samples = len(filenames)
+print_time = timeit.default_timer()
 print('Number of total examples:', num_samples)
 print('Number of examples per label:',
       len(tf.io.gfile.listdir(str(data_dir/commands[0]))))
 print('Example file tensor:', filenames[0])
+skipped_time += timeit.default_timer() - print_time
 
 train_files = filenames[:6400]
 val_files = filenames[6400: 6400 + 800]
 test_files = filenames[-800:]
 
+print_time = timeit.default_timer()
 print('Training set size', len(train_files))
 print('Validation set size', len(val_files))
 print('Test set size', len(test_files))
+skipped_time += timeit.default_timer() - print_time
 
 ##
 ## Decode audio and put label
@@ -217,7 +231,9 @@ val_ds = val_ds.cache().prefetch(AUTOTUNE)
 
 for spectrogram, _ in spectrogram_ds.take(1):
     input_shape = spectrogram.shape
+print_time = timeit.default_timer()
 print('Input shape:', input_shape)
+skipped_time += timeit.default_timer() - print_time
 num_labels = len(commands)
 
 # Instantiate the `tf.keras.layers.Normalization` layer.
@@ -258,10 +274,12 @@ history = model.fit(
     callbacks=tf.keras.callbacks.EarlyStopping(verbose=1, patience=2),
 )
 
+print_time = timeit.default_timer()
 metrics = history.history
 plt.plot(history.epoch, metrics['loss'], metrics['val_loss'])
 plt.legend(['loss', 'val_loss'])
 plt.show()
+skipped_time += timeit.default_timer() - print_time
 
 ##
 ## Evaluate model performance
@@ -281,7 +299,9 @@ y_pred = np.argmax(model.predict(test_audio), axis=1)
 y_true = test_labels
 
 test_acc = sum(y_pred == y_true) / len(y_true)
+print_time = timeit.default_timer()
 print(f'Test set accuracy: {test_acc:.0%}')
+skipped_time += timeit.default_timer() - print_time
 
 ##
 ## Run inference on audio file
@@ -293,6 +313,12 @@ sample_ds = preprocess_dataset([str(sample_file)])
 
 for spectrogram, label in sample_ds.batch(1):
     prediction = model(spectrogram)
+    print_time = timeit.default_timer()
     plt.bar(commands, tf.nn.softmax(prediction[0]))
     plt.title(f'Predictions for "{commands[label[0]]}"')
     plt.show()
+    skipped_time += timeit.default_timer() - print_time
+
+time = timeit.default_timer() - start_time - skipped_time
+
+write_csv(__file__, epochs=EPOCHS, time=time)
